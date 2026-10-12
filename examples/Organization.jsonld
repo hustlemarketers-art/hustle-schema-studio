@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://example.com/#organization",
+      "name": "Example Studio",
+      "url": "https://example.com/",
+      "description": "A fictional studio used only to demonstrate this tool.",
+      "logo": "https://example.com/logo.png"
+    }
+  ]
+}

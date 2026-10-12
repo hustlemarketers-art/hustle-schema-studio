@@ -1,0 +1,31 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Event",
+      "@id": "https://example.com/events/design/#event",
+      "name": "Example design workshop",
+      "url": "https://example.com/events/design/",
+      "description": "Fictional demonstration event. Do not publish as a real event.",
+      "startDate": "2027-01-15T10:00:00+05:30",
+      "endDate": "2027-01-15T12:00:00+05:30",
+      "location": {
+        "@type": "Place",
+        "name": "Example Hall",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Example Road",
+          "addressLocality": "Example City",
+          "addressCountry": "IN"
+        }
+      },
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "INR",
+        "url": "https://example.com/events/design/"
+      }
+    }
+  ]
+}

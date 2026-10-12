@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://example.com/shop/notebook/#product",
+      "name": "Example reusable notebook",
+      "url": "https://example.com/shop/notebook/",
+      "description": "Fictional sample product. Replace every value before publishing.",
+      "image": "https://example.com/images/notebook.jpg",
+      "sku": "DEMO-001",
+      "brand": {
+        "@type": "Brand",
+        "name": "Example Brand"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": 25,
+        "priceCurrency": "USD",
+        "url": "https://example.com/shop/notebook/",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://example.com/services/audit/#service",
+      "name": "Example website audit",
+      "url": "https://example.com/services/audit/",
+      "serviceType": "Website audit",
+      "areaServed": "India",
+      "provider": {
+        "@id": "https://example.com/#organization"
+      }
+    }
+  ]
+}

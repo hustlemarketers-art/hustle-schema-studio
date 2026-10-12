@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://example.com/services/audit/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://example.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://example.com/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Website audit",
+          "item": "https://example.com/services/audit/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://example.com/#website",
+      "name": "Example Studio",
+      "url": "https://example.com/",
+      "publisher": {
+        "@id": "https://example.com/#organization"
+      }
+    }
+  ]
+}
