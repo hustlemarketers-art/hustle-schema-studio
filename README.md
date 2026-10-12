@@ -1,6 +1,10 @@
 # Hustle Schema Studio: Free JSON-LD Schema Generator and Checker
 
+[![Tests](https://github.com/hustlemarketers-art/hustle-schema-studio/actions/workflows/tests.yml/badge.svg)](https://github.com/hustlemarketers-art/hustle-schema-studio/actions/workflows/tests.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **[Open the live tool](https://hustlemarketers-art.github.io/hustle-schema-studio/)**
+
+![Hustle Schema Studio: building an Organization entity and its JSON-LD](docs/screenshot-create.png)
 
 Create schema markup, check it for errors and get it ready for your website in one place. Hustle Schema Studio builds connected JSON-LD for 12 schema types (Organization, LocalBusiness, Person, WebSite, WebPage, Service, Article, Product, BreadcrumbList, FAQPage, Event and VideoObject), checks existing JSON-LD or pasted page HTML for common errors and conflicting entity IDs, and explains the findings in plain language.
 
@@ -47,6 +51,8 @@ Required form fields are **template requirements**, not a claim that Google requ
 Google retired HowTo rich results in September 2023 and the sitelinks search box in November 2024. The app does not generate these retired features. WebSite site-name markup remains supported. Rules were reviewed on **12 October 2026**; consult [SOURCES.md](SOURCES.md) before updating them.
 
 ## What the checker does
+
+![Hustle Schema Studio checker separating errors, warnings and notes](docs/screenshot-check.png)
 
 - Parses JSON and checks a selected set of field shapes, dates, numbers, URLs, references and Google feature profiles.
 - Extracts inline JSON-LD blocks from pasted HTML without executing its scripts or loading its assets.
