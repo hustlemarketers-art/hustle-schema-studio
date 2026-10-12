@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create connected JSON-LD, review common schema issues, and prepare structured data for your website with Hustle Schema Studio.">
+  <title>Hustle Schema Studio | Create. Check. Understand.</title>
+  <style>
+:root{--ink:#20202d;--muted:#72727f;--paper:#f6f5f9;--line:#e8e5ee;--purple:#623bd3;--purple-dark:#48269e;--lavender:#f0ebff;--lime:#d8f481;--red:#a73543;--amber:#946015;--green:#32744d;--radius:16px}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6}button,input,select,textarea{font:inherit}button,a,input,textarea,select{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:var(--purple);text-underline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,pre:focus-visible,.upload:focus-within{outline:3px solid #987aea;outline-offset:3px}[hidden]{display:none!important}.topbar{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:22px max(28px,calc((100vw - 1500px)/2));gap:20px}.brand{display:flex;gap:12px;text-decoration:none;color:var(--ink);font-size:12px;letter-spacing:1px;line-height:1.25;font-weight:900}.brand b{display:block;font-size:16px;letter-spacing:-.3px}.brand small{display:block;margin-top:4px;color:var(--muted);font-weight:500;letter-spacing:.2px;font-size:10px}.brand-icon{font-family:monospace;font-weight:500;color:#fff;background:var(--purple);padding:7px 10px;border-radius:13px;font-size:29px;line-height:1.35;letter-spacing:-3px}.top-meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.local-dot{width:7px;height:7px;border-radius:50%;background:#79a247}.version{border:1px solid var(--line);padding:3px 9px;border-radius:6px;margin-left:15px}main{max-width:1560px;padding:0 30px;margin:auto}.intro{display:flex;justify-content:space-between;align-items:center;gap:50px;padding:44px 14px 36px}.eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:800;color:var(--purple)}h1{font-size:clamp(32px,3.4vw,48px);line-height:1.12;letter-spacing:-1.9px;margin:15px 0}h2{font-size:20px;line-height:1.3;letter-spacing:-.5px;margin:6px 0}h3{line-height:1.35;font-size:16px;letter-spacing:-.2px}.intro p{color:var(--muted);font-size:15px;line-height:1.7;margin:16px 0 0}.intro-card{padding:25px 32px;border:1px solid #ded5f7;border-radius:18px;background:linear-gradient(135deg,#ede8fb,#f7f5ff);transform:rotate(-2deg);min-width:390px}.mini-code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#795da9;font-size:12px;line-height:1.9}.mini-code span{color:var(--purple-dark)}.intro-card p{font-size:11px;font-weight:700;color:#80738e}.workspace-tabs{display:flex;gap:5px;margin:0 0 18px;border-bottom:1px solid var(--line)}.tab{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;color:var(--muted);padding:15px 22px;font-size:13px;font-weight:650}.tab span{font-size:10px;margin-right:9px;opacity:.65}.tab.active{border-color:var(--purple);color:var(--purple)}.workspace{display:grid;grid-template-columns:220px minmax(290px,1fr) minmax(320px,1fr);background:white;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;align-items:start}.template-panel{padding:25px 16px;align-self:stretch;background:#fcfbfe;border-right:1px solid var(--line)}.section-label{font-size:9px;font-weight:800;letter-spacing:1px;display:flex;justify-content:space-between;padding:0 2px 15px;color:#787280}.section-label span{padding:0 5px;background:#eee9f8;border-radius:4px;color:var(--purple)}input,textarea,select{width:100%;border:1px solid #dedbe6;border-radius:8px;padding:10px 12px;background:#fff;color:var(--ink);transition:border-color .15s}input::placeholder,textarea::placeholder{color:#a2a0ac}input:hover,textarea:hover,select:hover{border-color:#b8a8df}input[type=checkbox]{width:auto;accent-color:var(--purple)}#template-search{font-size:12px;padding:9px;margin-bottom:14px}.template-list{display:flex;flex-direction:column;gap:3px}.template-button{display:flex;align-items:center;width:100%;text-align:left;border:0;background:none;border-radius:8px;padding:9px 11px;color:#6b6573;font-size:12px;gap:9px}.template-button::before{content:"◇";color:#b1a8be;font-size:15px}.template-button.selected{background:var(--lavender);color:var(--purple);font-weight:750}.template-button.selected::before{color:var(--purple)}.template-button:hover{background:#f2eef9}.aside-note{font-size:11px;line-height:1.8;color:#99919f;padding:24px 10px 0;border-top:1px solid var(--line);margin-top:25px}.editor-panel{padding:26px 28px;min-width:0}.panel-header{display:flex;justify-content:space-between;align-items:center;gap:12px}.muted{color:var(--muted);font-size:12px;line-height:1.75}.compact{font-size:11px}.type-note{background:#faf8ff;border:1px solid #eee7fd;border-radius:9px;padding:12px 14px;margin:20px 0}.type-note p{font-size:11px;color:#796c90;margin:4px 0}.type-note a{font-size:10px}.tiny-label{font-size:8px;letter-spacing:1.3px;color:#8e7aa7;font-weight:800}.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px 13px}.field{min-width:0}.field.wide{grid-column:1/-1}label{display:block;font-size:11px;font-weight:650;margin-bottom:6px}.field-help{font-size:10px;line-height:1.6;color:#8f8996;margin:5px 0 0}.field input,.field textarea,.field select{font-size:12px}.field textarea{resize:vertical;min-height:94px}.required{color:var(--purple)}.form-hint{font-size:10px;color:#96909e;margin-top:20px}.form-actions{display:flex;gap:10px;align-items:center;margin-top:22px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:39px;padding:9px 14px;border-radius:8px;border:1px solid transparent;font-size:11px;font-weight:650;line-height:1.5;text-decoration:none;transition:background .15s}.primary{background:var(--purple);color:white}.primary:hover{background:var(--purple-dark)}.outline{background:#fff;border-color:#e1dbea;color:#61546f}.outline:hover,.subtle:hover{background:#f4f0fc}.subtle{background:#f7f5fa;border-color:#eeebf2;color:#7d6c8c}.small{min-height:30px;padding:6px 10px;font-size:10px}.button:disabled,.text-button:disabled{opacity:.4;cursor:not-allowed}.form-error{font-size:12px;line-height:1.6;background:#fff1f2;border:1px solid #f6d8dc;border-radius:8px;color:var(--red);padding:11px 14px;margin-top:20px}.output-panel{border-left:1px solid var(--line);padding:26px 24px;align-self:stretch;background:linear-gradient(#fff,#faf9fd);min-width:0}.output-panel h2{font-size:16px}.pill{padding:3px 9px;font-size:9px;border-radius:20px;background:#f1edf8;color:#8b7b9d;white-space:nowrap}.entity-list{display:flex;flex-direction:column;gap:8px;margin:20px 0}.entity-card{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:9px}.entity-card .entity-icon{color:var(--purple);background:#f1ebfc;padding:2px 7px;border-radius:6px;font-family:monospace;font-size:14px}.entity-card strong{font-size:11px;display:block;overflow-wrap:anywhere}.entity-card small{font-size:9px;color:#9d92a7;display:block;overflow-wrap:anywhere}.entity-details{min-width:0;flex:1}.icon-button{background:none;border:0;color:#9d8dac;padding:5px;line-height:1;font-size:18px}.icon-button:hover{color:var(--red)}.empty-state{text-align:center;padding:24px 8px;color:#a29aaa}.empty-symbol{display:inline-block;font:32px ui-monospace,monospace;letter-spacing:-2px;color:#b1a2c6;background:#f3eefb;border:1px dashed #ddd1ee;padding:10px 17px;border-radius:16px}.empty-state h3{font-size:13px;color:#887b98;margin:18px 0 8px}.empty-state p{font-size:11px;margin:0 0 15px}.code-toolbar{display:flex;justify-content:space-between;align-items:center;border:1px solid #322740;border-bottom:0;border-radius:10px 10px 0 0;background:#30263f;padding:9px 14px;color:#b2a3c8;font-size:8px;letter-spacing:1px}.code-toolbar button{color:#cce992;letter-spacing:0;font-size:10px}pre{font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;background:#241c32;color:#d6c3f3;border-radius:0 0 10px 10px;padding:18px;margin:0;overflow:auto;min-height:160px;max-height:430px;tab-size:2;white-space:pre;scrollbar-color:#68527b #241c32}.output-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.output-actions .primary{grid-column:1/-1;background:#d5ef9c;color:#3d5422;border-color:#c4e387}.output-actions .primary:hover{background:#c3e586}.text-button{background:none;border:0;color:var(--purple);padding:3px 0;font-size:11px}.danger{color:#a78395;font-size:10px}.small-note{margin-top:22px;font-size:10px;line-height:1.7;color:#a39aac}.check-workspace{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;min-width:0}.segmented{display:inline-flex;padding:4px;background:#f3f0f8;border-radius:8px;margin:10px 0 18px}.segmented button{border:0;background:none;padding:7px 20px;border-radius:5px;color:#938799;font-size:11px}.segmented button.selected{background:white;box-shadow:0 1px 4px #21113215;color:var(--purple);font-weight:650}#page-url-wrap{margin-bottom:14px}#check-input{min-height:350px;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical;background:#fcfbfe}.check-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:18px}.upload{margin:0;cursor:pointer}.scope-note{background:#f9f7fc;padding:16px;border-radius:10px;font-size:11px;line-height:1.75;margin-top:26px;color:#8c8096}.scope-note b{color:#695e75}.scope-note p{margin:6px 0}.check-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.metric{background:#faf8fc;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}.metric b{display:block;font-size:23px}.metric span{font-size:9px;color:#8e829a}.metric.error b{color:var(--red)}.metric.warning b{color:var(--amber)}.metric.info b{color:var(--purple)}.finding{border:1px solid var(--line);border-left:3px solid #b39ccd;border-radius:8px;padding:13px 15px;margin:10px 0}.finding.error{border-left-color:#ce7882;background:#fffafb}.finding.warning{border-left-color:#d4b16c;background:#fffcf5}.finding .finding-top{display:flex;justify-content:space-between;gap:10px}.finding .finding-top b{font-size:9px;text-transform:uppercase;letter-spacing:.7px}.finding .finding-top code{font-size:9px;overflow-wrap:anywhere;color:#a18fae}.finding p{font-size:11px;line-height:1.75;margin:7px 0 0;color:#716679}.finding .path{font:9px ui-monospace,monospace;overflow-wrap:anywhere;color:#ac9db9}.page-fact{font-size:10px;overflow-wrap:anywhere;background:#f8f5fc;border-radius:5px;padding:7px 10px;margin:5px 0;color:#8f809d}.next-check{border-top:1px solid var(--line);padding-top:22px;margin-top:22px;font-size:11px;color:#82728d}.next-check p{margin:6px 0}.next-check a{font-size:10px;display:inline-block;margin:10px 18px 0 0}.passed{padding:15px;border:1px solid #dae9d7;background:#f6fbf4;color:var(--green);border-radius:8px;font-size:12px;margin-bottom:16px}.install-heading{text-align:center;max-width:620px;margin:40px auto 30px}.install-heading h2{font-size:30px;letter-spacing:-1px}.install-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1050px;margin:0 auto}.install-step{position:relative;padding:30px 35px}.step-number{color:#a999c8;font-size:11px;border:1px solid #e6def1;background:#f7f3fc;padding:7px 9px;border-radius:8px}.install-step h3{margin:20px 0 10px}.install-step p{font-size:12px;color:#8b8095}.install-step code{color:#806499;font-size:10px;overflow-wrap:anywhere}.final-checklist{max-width:1050px;margin:20px auto;background:#fafcf5}.final-checklist h3{margin-top:0}.checklist{display:grid;grid-template-columns:1fr 1fr;gap:10px 25px}.checklist label{display:flex;gap:10px;align-items:start;color:#7a806b;font-size:11px;font-weight:400}.checklist input{margin:3px 0 0}.rules-note{max-width:1050px;margin:30px auto 45px;color:#8b7f94;font-size:12px}.rules-note h3{color:#73627f}.rules-note ul{padding-left:18px;line-height:1.9}.resource-links{display:flex;gap:20px;flex-wrap:wrap;font-size:10px}footer{display:flex;justify-content:space-between;gap:20px;margin:26px 0;padding:10px 5px;font-size:9px;letter-spacing:.4px;color:#a59cab}footer a{color:#9687a5;font-size:10px;text-decoration:none}.footer-sep{padding:0 10px;color:#ccc5d4}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);padding:12px 22px;background:#322840;color:white;border:1px solid #59456d;border-radius:10px;box-shadow:0 5px 30px #1e132840;font-size:12px;z-index:100;max-width:90vw}.noscript{position:fixed;top:0;left:0;right:0;background:#fff3d0;padding:20px;text-align:center}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(min-width:1500px){.workspace{grid-template-columns:235px minmax(370px,1fr) minmax(370px,1fr)}}@media(max-width:1150px){main{padding:0 20px}.workspace{grid-template-columns:185px minmax(260px,1fr) minmax(280px,1fr)}.editor-panel,.output-panel{padding:24px 18px}.fields{grid-template-columns:1fr}.field{grid-column:1/-1}.intro-card{min-width:340px;padding:22px}.tab{padding:14px 18px}}@media(max-width:930px){.workspace{grid-template-columns:180px 1fr}.output-panel{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);display:block}.output-actions{grid-template-columns:1fr 1fr 1fr}.output-actions .primary{grid-column:auto}.output-panel pre{max-height:320px}.intro-card{display:none}.intro{padding:32px 10px}.check-workspace{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}}@media(max-width:600px){main{padding:0 12px}.topbar{padding:15px 20px}.top-meta{font-size:0;gap:0}.version{font-size:10px;margin-left:10px}.brand b{font-size:14px}.brand-icon{font-size:24px}.workspace{display:block}.template-panel{border-right:0;border-bottom:1px solid var(--line);padding:17px}.template-list{display:grid;grid-template-columns:1fr 1fr}.template-button{font-size:11px;padding:7px}.aside-note{display:none}.editor-panel{padding:24px 20px}.fields{grid-template-columns:1fr}.tab{padding:13px 10px;font-size:11px;flex:1}.tab span{display:none}.workspace-tabs{gap:0}.intro h1{font-size:34px;letter-spacing:-1.4px}.intro p{font-size:13px}.intro{padding:27px 8px}.output-actions{grid-template-columns:1fr 1fr}.output-actions .primary{grid-column:1/-1}.panel{padding:22px}.install-grid{grid-template-columns:1fr}.install-heading h2{font-size:24px}.install-heading{margin:30px 10px}.install-step{padding:28px}.check-actions .text-button{font-size:10px}footer{flex-direction:column;gap:6px;font-size:8px}.resource-links{gap:10px}.panel-header{align-items:center}.type-note{margin:18px 0}.form-actions .button{font-size:10px}.top-meta .local-dot{display:none}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Hustle Schema Studio home"><span class="brand-icon" aria-hidden="true">{h}</span><span>HUSTLE <b>SCHEMA STUDIO</b><small>by Hustle Marketers</small></span></a>
+  <div class="top-meta"><span class="local-dot"></span> Works in your browser <span class="version">v1.0</span></div>
+</header>
+<main>
+  <section class="intro"><div><span class="eyebrow">STRUCTURED DATA, MADE CLEAR</span><h1>Give your content<br>a clearer meaning.</h1><p>Create connected schema. Catch common errors.<br>Understand exactly what to add to your page.</p></div><div class="intro-card"><div class="mini-code">“@context”: “https://schema.org”<br>“@graph”: [<br>&nbsp;&nbsp;<span>your business, your page, your content</span><br>]</div><p>One page. Connected entities. Clear instructions.</p></div></section>
+  <nav class="workspace-tabs" aria-label="Workspace"><button class="tab active" data-view="build" aria-current="page"><span>01</span> Create schema</button><button class="tab" data-view="check"><span>02</span> Check markup</button><button class="tab" data-view="install"><span>03</span> Add to your site</button></nav>
+  <section id="view-build" class="workspace">
+    <aside class="template-panel"><div class="section-label">CHOOSE A TEMPLATE <span id="type-count"></span></div><label class="sr-only" for="template-search">Search templates</label><input type="search" id="template-search" placeholder="Find a schema type…"><div id="template-list" class="template-list"></div><div class="aside-note">Start with the main subject of your page. Add only entities that belong on that page.</div></aside>
+    <div class="editor-panel"><div class="panel-header"><div><span class="eyebrow" id="template-category"></span><h2 id="template-title"></h2></div><button class="button subtle small" id="load-example" type="button">Fill demo</button></div><p id="template-description" class="muted"></p><div class="type-note"><span class="tiny-label">GOOGLE FEATURE NOTES</span><p id="template-status"></p><a id="template-source" href="https://schema.org/" target="_blank" rel="noopener noreferrer">Read the source ↗</a></div><form id="schema-form" novalidate><div id="schema-fields" class="fields"></div><p class="form-hint">* Required by this template. Google requirements may differ; see the feature notes.</p><div id="form-error" class="form-error" role="alert" hidden></div><div class="form-actions"><button class="button primary" type="submit" id="add-entity">Add to page schema <span aria-hidden="true">＋</span></button><button class="button subtle" type="button" id="reset-form">Clear fields</button></div></form></div>
+    <aside class="output-panel"><div class="panel-header"><h2>Your page schema</h2><span class="pill" id="entity-count">0 entities</span></div><p class="muted compact">Build a graph for one page. Reuse an entity’s ID when another entity refers to it.</p><div id="entity-list" class="entity-list"></div><div id="empty-graph" class="empty-state"><span class="empty-symbol">{ }</span><h3>Your graph starts here</h3><p>Fill a template and add it to see<br>your JSON-LD come together.</p><button class="button subtle small" id="hustle-starter">Use Hustle Marketers starter</button></div><div class="code-toolbar"><span>JSON-LD SCRIPT</span><button class="text-button" id="copy-code" disabled>Copy</button></div><pre id="code-output" tabindex="0" aria-label="Generated schema code"><code>// Add your first entity to create code.</code></pre><div class="output-actions"><button class="button primary" id="download-json" disabled>Download JSON-LD ↓</button><button class="button outline" id="download-snippet" disabled>HTML snippet ↓</button><button class="button outline" id="check-graph" disabled>Check this graph</button></div><button class="text-button danger" id="clear-graph" disabled>Clear page schema</button><div class="small-note">Your input stays in this tab. Download before closing; nothing is saved automatically.</div></aside>
+  </section>
+  <section id="view-check" class="check-workspace" hidden>
+    <div class="check-input panel"><div class="panel-header"><div><span class="eyebrow">SEE WHAT NEEDS ATTENTION</span><h2>Check existing markup</h2></div></div><p class="muted">Paste JSON-LD or page HTML. The checker inspects the text you supply; it does not fetch the website.</p><div class="segmented" role="group" aria-label="Input format"><button id="mode-json" class="selected" aria-pressed="true">JSON-LD</button><button id="mode-html" aria-pressed="false">Page HTML</button></div><div id="page-url-wrap" hidden><label for="page-url">Page URL <span class="muted">optional</span></label><input id="page-url" type="url" placeholder="https://yourwebsite.com/page/"><p class="field-help">Used only to resolve relative URLs in pasted HTML.</p></div><label for="check-input" class="sr-only">Markup to inspect</label><textarea id="check-input" spellcheck="false" placeholder='Paste JSON-LD here, starting with { or [ …'></textarea><div class="check-actions"><button class="button primary" id="run-check">Run checks <span aria-hidden="true">→</span></button><label for="import-file" class="button outline upload">Open a file<input id="import-file" type="file" accept=".json,.jsonld,.html,.htm,.txt" class="sr-only"></label><button class="text-button" id="check-demo">Try a broken demo</button></div><div class="scope-note"><b>What these checks cover</b><p>JSON syntax, selected type rules, common URL and date issues, entity IDs, and basic page-source signals. This is a focused checker, not a complete Schema.org or Google validator.</p><p>It cannot confirm live crawling, rendered content, indexing, content truthfulness, or eligibility under every Google policy.</p></div></div>
+    <div class="check-output panel"><div class="panel-header"><h2>Review findings</h2><button class="button subtle small" id="download-report" disabled>Export report ↓</button></div><div id="check-empty" class="empty-state"><span class="empty-symbol">✓?</span><h3>Clarity before publishing</h3><p>Run a check to see errors, recommendations,<br>and items that need a human review.</p></div><div id="check-results" hidden><div id="check-summary" class="check-summary" role="status"></div><div id="page-facts"></div><div id="findings"></div><div class="next-check"><b>Finish with the official tools</b><p>Test your code in Google’s Rich Results Test and the Schema.org validator. After installing it, test the live URL.</p><a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener noreferrer">Google Rich Results Test ↗</a><a href="https://validator.schema.org/" target="_blank" rel="noopener noreferrer">Schema.org Validator ↗</a></div></div></div>
+  </section>
+  <section id="view-install" class="install-workspace" hidden>
+    <div class="install-heading"><span class="eyebrow">FROM CODE TO YOUR WEBSITE</span><h2>Make the markup match the page.</h2><p class="muted">Google recommends JSON-LD. Accurate content and accessible pages matter as much as valid code.</p></div>
+    <div class="install-grid"><article class="panel install-step"><span class="step-number">01</span><h3>Choose the right page</h3><p>Add product schema to the product page, article schema to the article, and business details to a relevant business page. Use real, visible information.</p><p>Keep IDs stable, such as <code>https://yourwebsite.com/#organization</code>. Connect entities by reusing those IDs.</p></article><article class="panel install-step"><span class="step-number">02</span><h3>Check existing markup</h3><p>SEO plugins and themes may already create schema. Inspect the source and coordinate with that output before adding another block.</p><p>Do not add conflicting prices, duplicate business identities, fabricated ratings, or every template to every page.</p></article><article class="panel install-step"><span class="step-number">03</span><h3>Install the JSON-LD</h3><p>Copy the generated script into the relevant page’s HTML <code>&lt;head&gt;</code> or body, ideally in the HTML served by your site.</p><p>On WordPress, use your existing SEO plugin’s supported schema controls or a trusted snippet tool with page targeting. Do not paste scripts into a plain text paragraph block.</p></article><article class="panel install-step"><span class="step-number">04</span><h3>Verify on the live page</h3><p>Use the Rich Results Test’s URL mode after publishing. Check Googlebot access, robots.txt, HTTP response, noindex directives, and crawlable images.</p><p>Use Search Console URL Inspection to check Google’s view, then monitor relevant reports. Correct markup does not guarantee crawling, indexing, rankings, or rich results.</p></article></div>
+    <div class="panel final-checklist"><h3>Before you publish</h3><div class="checklist"><label><input type="checkbox"> All names, prices, dates, and claims match the visible page.</label><label><input type="checkbox"> Existing theme or plugin schema has been reviewed.</label><label><input type="checkbox"> Demo URLs and sample data have been replaced.</label><label><input type="checkbox"> Official validation and live-page checks are complete.</label></div></div>
+    <div class="rules-note"><h3>A few rules worth knowing</h3><ul><li>FAQPage is still a Schema.org type, but Google retired FAQ rich results in May 2026.</li><li>Service, Person, and WebPage can describe entities without a dedicated rich-result feature.</li><li>WebSite markup can support site names. The old sitelinks search box has been retired.</li><li>This Product template uses an Offer for the product-snippet path. It is not a complete merchant-listing or product-variant builder.</li><li>These 12 templates are a focused starting set. Imported types outside the checker’s rules are labelled as unchecked.</li></ul><p>Rules reviewed 12 October 2026. Review the latest documentation before production use.</p><div class="resource-links"><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">Google structured data guide ↗</a><a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery" target="_blank" rel="noopener noreferrer">Supported search features ↗</a><a href="https://developers.google.com/search/updates" target="_blank" rel="noopener noreferrer">Documentation updates ↗</a></div></div>
+  </section>
+  <footer><span>HUSTLE MARKETERS <span class="footer-sep">/</span> Built for useful, understandable SEO.</span><span><a href="https://github.com/hustlemarketers-art/hustle-schema-studio" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a><span class="footer-sep">/</span><a href="https://hustlemarketers.com/" target="_blank" rel="noopener noreferrer">hustlemarketers.com ↗</a></span></footer>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><div class="noscript">Enable JavaScript to use the schema builder and checker.</div></noscript>
+<script>
+/* Hustle Schema Studio. Dependency-free, limited rule checks. No network calls. */
+(function (root, factory) {
+  'use strict';
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.HustleSchema = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const SCHEMA = 'https://schema.org';
+  const DOCS = 'https://developers.google.com/search/docs/appearance/structured-data/';
+  const f = (key, label, type, required, help, options) => ({ key, label, type: type || 'text', required: !!required, ...(help ? { help } : {}), ...(options ? { options } : {}) });
+  const id = () => f('id', 'Entity ID', 'url', false, 'Optional stable absolute URL with a fragment, for example https://example.com/#organization.');
+  const name = (label) => f('name', label || 'Name', 'text', true);
+  const url = (required) => f('url', 'Page URL', 'url', required, 'Use the actual canonical, publicly accessible page URL.');
+  const description = () => f('description', 'Description', 'textarea');
+  const image = () => f('image', 'Image URL', 'url');
+  const addressFields = (required) => [f('streetAddress', 'Street address', 'text', required), f('addressLocality', 'City / locality', 'text', required), f('addressRegion', 'State / region'), f('postalCode', 'Postal code'), f('addressCountry', 'Country code', 'text', required, 'Use a two-letter country code, such as IN or US.')];
+  const sameAs = () => f('sameAs', 'Official profile URLs', 'textarea', false, 'One complete URL per line. Only profiles that identify this exact entity.');
+  const commonExample = { name: 'Example Studio', url: 'https://example.com/', id: 'https://example.com/#organization' };
+  const TYPES = [
+    { id: 'Organization', label: 'Organization', category: 'Identity', description: 'Describe a real organization and connect its official identity.', googleStatus: 'Organization understanding; display features are not guaranteed.', source: DOCS + 'organization', fields: [name(), url(), id(), description(), f('logo', 'Logo URL', 'url'), f('email', 'Public email'), f('telephone', 'Public phone'), sameAs()], example: { ...commonExample, description: 'A fictional studio used only to demonstrate this tool.', logo: 'https://example.com/logo.png' } },
+    { id: 'LocalBusiness', label: 'Local business', category: 'Identity', description: 'Describe a business with a real physical location.', googleStatus: 'Local business feature candidate; name and physical address are required.', source: DOCS + 'local-business', fields: [name(), url(), id(), image(), f('telephone', 'Public phone'), f('priceRange', 'Price range', 'text', false, 'An accurate range, for example ₹₹ or $50–$200.'), ...addressFields(true), f('latitude', 'Latitude', 'number'), f('longitude', 'Longitude', 'number')], example: { ...commonExample, name: 'Example Studio Downtown', id: 'https://example.com/#localbusiness', streetAddress: '123 Example Street', addressLocality: 'Example City', addressRegion: 'CA', postalCode: '90001', addressCountry: 'US', latitude: '0', longitude: '0' } },
+    { id: 'Person', label: 'Person', category: 'Identity', description: 'Describe a person using accurate public professional information.', googleStatus: 'Semantic markup; a plain Person has no dedicated generic Google rich result.', source: 'https://schema.org/Person', fields: [name(), url(), id(), f('jobTitle', 'Job title'), description(), image(), sameAs()], example: { name: 'Alex Example', url: 'https://example.com/team/alex/', id: 'https://example.com/team/alex/#person', jobTitle: 'Designer' } },
+    { id: 'WebSite', label: 'Website', category: 'Website', description: 'Identify the overall site and its preferred site name.', googleStatus: 'Site-name feature candidate; use the domain or subdomain homepage.', source: 'https://developers.google.com/search/docs/appearance/site-names', fields: [name('Site name'), url(true), id(), f('alternateName', 'Alternative site name'), description(), f('publisherId', 'Publisher entity ID', 'url')], example: { name: 'Example Studio', url: 'https://example.com/', id: 'https://example.com/#website', publisherId: 'https://example.com/#organization' } },
+    { id: 'WebPage', label: 'Web page', category: 'Website', description: 'Describe one page and connect it to a website or primary entity.', googleStatus: 'Semantic markup; a plain WebPage has no dedicated generic Google rich result.', source: 'https://schema.org/WebPage', fields: [name('Page title'), url(true), id(), description(), f('websiteId', 'Website entity ID', 'url'), f('aboutId', 'Main subject entity ID', 'url')], example: { name: 'About Example Studio', url: 'https://example.com/about/', id: 'https://example.com/about/#webpage', websiteId: 'https://example.com/#website', aboutId: 'https://example.com/#organization' } },
+    { id: 'Service', label: 'Service', category: 'Business', description: 'Describe a real service and the organization or person providing it.', googleStatus: 'Semantic markup; a plain Service has no dedicated Google rich result.', source: 'https://schema.org/Service', fields: [name('Service name'), url(), id(), description(), f('serviceType', 'Service type'), f('providerId', 'Provider entity ID', 'url'), f('areaServed', 'Area served', 'text', false, 'A truthful place name or service area. Do not invent locations.')], example: { name: 'Example website audit', url: 'https://example.com/services/audit/', id: 'https://example.com/services/audit/#service', serviceType: 'Website audit', providerId: 'https://example.com/#organization', areaServed: 'India' } },
+    { id: 'Article', label: 'Article', category: 'Content', description: 'Describe an article with the real author, images and publishing dates.', googleStatus: 'Article feature candidate; Google lists recommended properties, not required properties.', source: DOCS + 'article', fields: [f('headline', 'Headline', 'text', true), url(), id(), description(), image(), f('datePublished', 'Published date / time', 'text', false, 'ISO 8601 date or date-time. For a time, include an offset, for example 2026-10-12T09:00:00+05:30.'), f('dateModified', 'Updated date / time', 'text'), f('authorName', 'Author name'), f('authorUrl', 'Author profile URL', 'url'), f('publisherName', 'Publisher name'), f('publisherUrl', 'Publisher URL', 'url')], example: { headline: 'A fictional guide to useful websites', url: 'https://example.com/articles/useful-websites/', id: 'https://example.com/articles/useful-websites/#article', image: 'https://example.com/images/guide.jpg', datePublished: '2026-10-01', authorName: 'Alex Example', authorUrl: 'https://example.com/team/alex/', publisherName: 'Example Studio', publisherUrl: 'https://example.com/' } },
+    { id: 'Product', label: 'Product + offer', category: 'Business', description: 'Describe one genuine product and a real, visible offer. This template never invents ratings.', googleStatus: 'Product-snippet offer path. Merchant-listing requirements are not fully checked.', source: DOCS + 'product-snippet', fields: [name('Product name'), url(), id(), description(), image(), f('sku', 'SKU'), f('brand', 'Brand'), f('price', 'Offer price', 'number', true, 'Use the actual visible price. Zero is valid for a genuinely free offer.'), f('priceCurrency', 'Currency code', 'text', true, 'Three-letter ISO 4217 currency, such as INR or USD.'), f('offerUrl', 'Offer / purchase URL', 'url'), f('availability', 'Availability', 'select', false, 'Choose only if it accurately reflects the offer.', [{ value: '', label: 'Leave out' }, { value: 'InStock', label: 'In stock' }, { value: 'OutOfStock', label: 'Out of stock' }, { value: 'PreOrder', label: 'Preorder' }, { value: 'BackOrder', label: 'Backorder' }, { value: 'SoldOut', label: 'Sold out' }, { value: 'Discontinued', label: 'Discontinued' }])], example: { name: 'Example reusable notebook', url: 'https://example.com/shop/notebook/', id: 'https://example.com/shop/notebook/#product', description: 'Fictional sample product. Replace every value before publishing.', image: 'https://example.com/images/notebook.jpg', sku: 'DEMO-001', brand: 'Example Brand', price: '25', priceCurrency: 'USD', offerUrl: 'https://example.com/shop/notebook/', availability: 'InStock' } },
+    { id: 'BreadcrumbList', label: 'Breadcrumbs', category: 'Website', description: 'Describe the real navigational path to this page.', googleStatus: 'Breadcrumb feature candidate; at least two ordered items are required.', source: DOCS + 'breadcrumb', fields: [id(), f('items', 'Breadcrumb items', 'textarea', true, 'One item per line: Name | https://example.com/path/. At least two lines. The final URL may be blank: Current page |')], example: { id: 'https://example.com/services/audit/#breadcrumb', items: 'Home | https://example.com/\nServices | https://example.com/services/\nWebsite audit | https://example.com/services/audit/' } },
+    { id: 'FAQPage', label: 'FAQ page', category: 'Content', description: 'Describe questions and answers that are visibly present on the page.', googleStatus: 'Semantic markup only. Google retired FAQ rich results in May 2026.', source: 'https://developers.google.com/search/updates', fields: [url(), id(), f('items', 'Questions and answers', 'textarea', true, 'One question and answer per line: Question? | Full visible answer. Include exactly one | separator per line.')], example: { url: 'https://example.com/faq/', id: 'https://example.com/faq/#faq', items: 'Is this real business content? | No. These are fictional examples for testing only.\nShould I replace these answers? | Yes. Use the complete questions and answers visible on your page.' } },
+    { id: 'Event', label: 'Event', category: 'Content', description: 'Describe a real event with a physical venue and accurate dates.', googleStatus: 'Event feature candidate. Google does not support virtual-only events in this feature.', source: DOCS + 'event', fields: [name('Event name'), url(), id(), description(), f('startDate', 'Start date / time', 'text', true, 'ISO 8601 date or date-time. Include the local timezone offset for an exact time.'), f('endDate', 'End date / time', 'text'), f('locationName', 'Venue name', 'text', true), ...addressFields(true), image(), f('organizerName', 'Organizer name'), f('organizerUrl', 'Organizer URL', 'url'), f('price', 'Ticket price', 'number'), f('priceCurrency', 'Ticket currency code', 'text', false, 'Required by this template when a price is supplied.'), f('offerUrl', 'Ticket URL', 'url')], example: { name: 'Example design workshop', url: 'https://example.com/events/design/', id: 'https://example.com/events/design/#event', description: 'Fictional demonstration event. Do not publish as a real event.', startDate: '2027-01-15T10:00:00+05:30', endDate: '2027-01-15T12:00:00+05:30', locationName: 'Example Hall', streetAddress: '123 Example Road', addressLocality: 'Example City', addressCountry: 'IN', price: '0', priceCurrency: 'INR', offerUrl: 'https://example.com/events/design/' } },
+    { id: 'VideoObject', label: 'Video', category: 'Content', description: 'Describe a video embedded on a page where users can actually watch it.', googleStatus: 'Video feature candidate; indexing and video policies apply beyond these field checks.', source: DOCS + 'video', fields: [name('Video title'), url(), id(), description(), f('thumbnailUrl', 'Thumbnail URL', 'url', true), f('uploadDate', 'Upload date / time', 'text', true, 'ISO 8601 date or date-time. Use the actual first-publication date.'), f('contentUrl', 'Video file URL', 'url'), f('embedUrl', 'Video player URL', 'url'), f('duration', 'Duration', 'text', false, 'ISO 8601 duration, for example PT2M30S.')], example: { name: 'Example website walkthrough', url: 'https://example.com/videos/walkthrough/', id: 'https://example.com/videos/walkthrough/#video', description: 'A fictional demonstration video.', thumbnailUrl: 'https://example.com/images/video-thumbnail.jpg', uploadDate: '2026-10-01T09:00:00+05:30', contentUrl: 'https://example.com/videos/demo.mp4', duration: 'PT2M30S' } }
+  ];
+  const TYPES_BY_ID = new Map(TYPES.map(t => [t.id, t]));
+  const own = (o, key) => Object.prototype.hasOwnProperty.call(o, key);
+  const isObject = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+  const text = value => value === null || value === undefined ? '' : String(value).trim();
+  const present = value => value !== undefined && value !== null && (typeof value !== 'string' || value.trim() !== '') && (!Array.isArray(value) || value.length > 0);
+  const list = value => Array.isArray(value) ? value : [value];
+  const hasType = (node, type) => isObject(node) && list(node['@type'] || []).some(t => shortType(t) === type);
+  const shortType = value => typeof value === 'string' ? value.replace(/^https?:\/\/schema\.org\//, '') : value;
+  function webUrl(value) { try { const u = new URL(value); return /^https?:$/.test(u.protocol) && !!u.hostname; } catch (_) { return false; } }
+  function absoluteId(value) { try { return /^[A-Za-z][A-Za-z0-9+.-]*:/.test(value) && !!new URL(value).protocol; } catch (_) { return false; } }
+  function validDate(value) {
+    if (typeof value !== 'string') return false;
+    const match = value.match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2})(?:\.(\d{1,9}))?)?(Z|[+-]\d{2}:\d{2})?)?$/);
+    if (!match) return false;
+    const y = +match[1], m = +match[2], d = +match[3];
+    const leap = y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+    const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (m < 1 || m > 12 || d < 1 || d > days[m - 1]) return false;
+    if (match[4] !== undefined && (+match[4] > 23 || +match[5] > 59 || +(match[6] || 0) > 59)) return false;
+    const zone = match[8];
+    if (zone && zone !== 'Z' && (+zone.slice(1, 3) > 14 || +zone.slice(4) > 59 || (+zone.slice(1, 3) === 14 && +zone.slice(4) !== 0))) return false;
+    return true;
+  }
+  function numeric(value, label, min, max) {
+    if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(text(value))) throw new Error(label + ' must be a finite number.');
+    const n = Number(value);
+    if (!Number.isFinite(n) || (min !== undefined && n < min) || (max !== undefined && n > max)) throw new Error(label + ' is outside the allowed range.');
+    return n;
+  }
+  function lines(value) { return text(value).split(/\r?\n/).map(s => s.trim()).filter(Boolean); }
+  function pairs(value, label, allowLastBlank) {
+    const rows = lines(value);
+    return rows.map((row, i) => {
+      const pieces = row.split('|').map(s => s.trim());
+      if (pieces.length !== 2 || !pieces[0] || (!pieces[1] && !(allowLastBlank && i === rows.length - 1))) throw new Error(label + ' line ' + (i + 1) + ' must contain exactly two values separated by |.');
+      return pieces;
+    });
+  }
+  function generate(typeId, form) {
+    const template = TYPES_BY_ID.get(typeId);
+    if (!template) throw new Error('Choose one of the supported schema templates.');
+    if (!isObject(form)) throw new Error('Form values must be an object.');
+    const d = {};
+    for (const field of template.fields) {
+      const value = text(form[field.key]);
+      if (field.required && !value) throw new Error(field.label + ' is required by this template.');
+      if (!value) continue;
+      if (field.type === 'url' && !webUrl(value)) throw new Error(field.label + ' must be an absolute HTTP or HTTPS URL.');
+      if (field.type === 'select' && !field.options.some(o => o.value === value)) throw new Error('Choose a supported value for ' + field.label + '.');
+      if (['datePublished', 'dateModified', 'startDate', 'endDate', 'uploadDate'].includes(field.key) && !validDate(value)) throw new Error(field.label + ' must be a real ISO 8601 date or date-time.');
+      d[field.key] = value;
+    }
+    const node = { '@type': typeId };
+    if (d.id) node['@id'] = d.id;
+    const copy = (...keys) => keys.forEach(key => { if (present(d[key])) node[key] = d[key]; });
+    copy('name', 'url', 'description', 'image');
+    const ref = (prop, field) => { if (d[field]) node[prop] = { '@id': d[field] }; };
+    const address = () => { const a = { '@type': 'PostalAddress' }; for (const key of ['streetAddress', 'addressLocality', 'addressRegion', 'postalCode', 'addressCountry']) if (d[key]) a[key] = d[key]; return a; };
+    const offer = () => {
+      if (!d.priceCurrency || !/^[A-Za-z]{3}$/.test(d.priceCurrency)) throw new Error('Offer currency must be a three-letter currency code.');
+      const o = { '@type': 'Offer', price: numeric(d.price, 'Offer price', 0), priceCurrency: d.priceCurrency.toUpperCase() };
+      if (d.offerUrl) o.url = d.offerUrl;
+      else if (d.url) o.url = d.url;
+      if (d.availability) o.availability = SCHEMA + '/' + d.availability;
+      return o;
+    };
+    if (['Organization', 'Person'].includes(typeId) && d.sameAs) { node.sameAs = lines(d.sameAs); node.sameAs.forEach(v => { if (!webUrl(v)) throw new Error('Every official profile must be an absolute HTTP or HTTPS URL.'); }); }
+    switch (typeId) {
+      case 'Organization': copy('logo', 'email', 'telephone'); break;
+      case 'LocalBusiness':
+        copy('telephone', 'priceRange'); node.address = address();
+        if (present(d.latitude) !== present(d.longitude)) throw new Error('Supply both latitude and longitude, or leave both blank.');
+        if (present(d.latitude)) node.geo = { '@type': 'GeoCoordinates', latitude: numeric(d.latitude, 'Latitude', -90, 90), longitude: numeric(d.longitude, 'Longitude', -180, 180) };
+        break;
+      case 'Person': copy('jobTitle'); break;
+      case 'WebSite': copy('alternateName'); ref('publisher', 'publisherId'); break;
+      case 'WebPage': ref('isPartOf', 'websiteId'); ref('about', 'aboutId'); break;
+      case 'Service': copy('serviceType', 'areaServed'); ref('provider', 'providerId'); break;
+      case 'Article':
+        copy('headline', 'datePublished', 'dateModified');
+        if (d.authorName) node.author = { '@type': 'Person', name: d.authorName, ...(d.authorUrl ? { url: d.authorUrl } : {}) };
+        else if (d.authorUrl) throw new Error('Add the author name with the author profile URL.');
+        if (d.publisherName) node.publisher = { '@type': 'Organization', name: d.publisherName, ...(d.publisherUrl ? { url: d.publisherUrl } : {}) };
+        else if (d.publisherUrl) throw new Error('Add the publisher name with the publisher URL.');
+        break;
+      case 'Product': copy('sku'); if (d.brand) node.brand = { '@type': 'Brand', name: d.brand }; node.offers = offer(); break;
+      case 'BreadcrumbList': {
+        const rows = pairs(d.items, 'Breadcrumb', true);
+        if (rows.length < 2) throw new Error('Breadcrumbs need at least two items.');
+        node.itemListElement = rows.map(([label, link], i) => { if (link && !webUrl(link)) throw new Error('Breadcrumb line ' + (i + 1) + ' needs an absolute HTTP or HTTPS URL.'); return { '@type': 'ListItem', position: i + 1, name: label, ...(link ? { item: link } : {}) }; });
+        break;
+      }
+      case 'FAQPage': node.mainEntity = pairs(d.items, 'FAQ', false).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })); break;
+      case 'Event':
+        copy('startDate', 'endDate'); node.location = { '@type': 'Place', name: d.locationName, address: address() };
+        node.eventAttendanceMode = SCHEMA + '/OfflineEventAttendanceMode';
+        if (d.organizerName) node.organizer = { '@type': 'Organization', name: d.organizerName, ...(d.organizerUrl ? { url: d.organizerUrl } : {}) };
+        else if (d.organizerUrl) throw new Error('Add the organizer name with the organizer URL.');
+        if (present(d.price)) node.offers = offer();
+        else if (d.priceCurrency || d.offerUrl) throw new Error('Add the actual ticket price, including 0 for a free ticket, or leave all offer fields blank.');
+        break;
+      case 'VideoObject':
+        copy('thumbnailUrl', 'uploadDate', 'contentUrl', 'embedUrl', 'duration');
+        if (d.duration && !/^P(?=.+)(?:\d+D)?(?:T(?=.+)(?:\d+H)?(?:\d+M)?(?:\d+(?:\.\d+)?S)?)?$/.test(d.duration)) throw new Error('Use an ISO 8601 video duration, for example PT2M30S.');
+        break;
+    }
+    const start = d.startDate || d.datePublished, end = d.endDate || d.dateModified;
+    if (start && end && Date.parse(end) < Date.parse(start)) throw new Error('The end or updated date cannot be before the start or published date.');
+    return node;
+  }
+  function graph(nodes) {
+    if (!Array.isArray(nodes) || !nodes.length || nodes.some(n => !isObject(n))) throw new Error('A graph needs one or more schema node objects.');
+    return { '@context': SCHEMA, '@graph': JSON.parse(JSON.stringify(nodes)) };
+  }
+  function serialize(data) {
+    const json = JSON.stringify(data, null, 2);
+    if (typeof json !== 'string') throw new Error('Provide JSON-serializable structured data.');
+    return json.replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+  }
+  function scriptTag(data) { return '<script type="application/ld+json">\n' + serialize(data) + '\n<\/script>'; }
+
+  // These are recognized by our limited profiles. This is not the full Schema.org vocabulary.
+  const RECOGNIZED = new Set([...TYPES.map(t => t.id), 'BlogPosting', 'NewsArticle', 'PostalAddress', 'GeoCoordinates', 'ImageObject', 'Offer', 'AggregateOffer', 'Brand', 'ListItem', 'Question', 'Answer', 'Place', 'VirtualLocation', 'AggregateRating', 'Review', 'Rating', 'MonetaryAmount', 'PriceSpecification', 'UnitPriceSpecification', 'Country', 'AdministrativeArea', 'City']);
+  const URL_FIELDS = new Set(['url', 'sameAs', 'image', 'logo', 'thumbnailUrl', 'contentUrl', 'embedUrl', 'mainEntityOfPage', 'license', 'acquireLicensePage']);
+  const DATE_FIELDS = new Set(['datePublished', 'dateModified', 'dateCreated', 'startDate', 'endDate', 'uploadDate', 'priceValidUntil', 'validFrom', 'validThrough', 'birthDate', 'deathDate']);
+  const LIMIT_TEXT = 'These are limited local structure and Google feature-profile checks, not a full Schema.org/JSON-LD validator or Google eligibility test. They do not fetch URLs, render pages, verify visible content, robots rules, indexability, ratings, supported vocabulary or rich-result display. Use Google’s Rich Results Test and Schema.org Validator before publishing.';
+  function validateInternal(input) {
+    const issues = [], nodes = [], ids = new Map(), refs = [], allNodes = [], seen = new WeakSet();
+    const add = (severity, code, path, message) => issues.push({ severity, code, path, message });
+    const error = (code, path, message) => add('error', code, path, message);
+    const warn = (code, path, message) => add('warning', code, path, message);
+    const info = (code, path, message) => add('info', code, path, message);
+    const done = () => ({ issues, nodes, summary: { errors: issues.filter(i => i.severity === 'error').length, warnings: issues.filter(i => i.severity === 'warning').length, info: issues.filter(i => i.severity === 'info').length } });
+    let data = input;
+    if (typeof input === 'string') { try { data = JSON.parse(input); } catch (e) { error('invalid_json', '$', 'Invalid JSON: ' + e.message); return done(); } }
+    if (!isObject(data) && !Array.isArray(data)) { error('invalid_root', '$', 'Structured data must be an object or an array of node objects.'); return done(); }
+    if (Array.isArray(data) && !data.length) error('empty_graph', '$', 'Add at least one schema node.');
+    const validContext = context => list(context).some(c => typeof c === 'string' && /^https?:\/\/schema\.org\/?$/.test(c));
+    const rootList = Array.isArray(data) ? data : [data];
+    rootList.forEach((n, i) => { if (isObject(n) && !own(n, '@context')) warn('missing_context', Array.isArray(data) ? '$[' + i + ']' : '$', 'This top-level document has no @context. Each independent document needs its own context; a sibling document cannot supply one. Use https://schema.org at the document root.'); });
+    const canonical = x => {
+      if (Array.isArray(x)) return '[' + x.map(canonical).join(',') + ']';
+      if (isObject(x)) return '{' + Object.keys(x).sort().map(k => JSON.stringify(k) + ':' + canonical(x[k])).join(',') + '}';
+      return JSON.stringify(x);
+    };
+    function visit(value, path, topLevel) {
+      if (!isObject(value)) { if (topLevel) error('invalid_node', path, 'Every graph node must be an object.'); return; }
+      if (seen.has(value)) { error('circular_input', path, 'Circular JavaScript objects are not JSON. Paste or provide ordinary JSON.'); return; }
+      seen.add(value);
+      if (own(value, '@context') && !validContext(value['@context'])) warn('unresolved_context', path + '.@context', 'This checker understands the standard Schema.org context only. Custom, reset or remote contexts are not expanded.');
+      if (own(value, '@graph')) {
+        if (!Array.isArray(value['@graph'])) error('invalid_graph', path + '.@graph', '@graph must be an array of node objects.');
+        else { if (!value['@graph'].length) error('empty_graph', path + '.@graph', 'Add at least one schema node.'); value['@graph'].forEach((n, i) => visit(n, path + '.@graph[' + i + ']', true)); }
+      }
+      if (own(value, '@type')) {
+        const raw = value['@type'];
+        if (!(typeof raw === 'string' && raw.trim()) && !(Array.isArray(raw) && raw.length && raw.every(t => typeof t === 'string' && t.trim()))) error('invalid_type', path + '.@type', '@type must be a nonempty string or an array of nonempty strings.');
+        else {
+          const types = list(raw).map(shortType);
+          nodes.push({ type: types.join(', '), id: typeof value['@id'] === 'string' ? value['@id'] : '', name: text(value.name || value.headline) });
+          allNodes.push({ value, path, types });
+          types.forEach(t => { if (!RECOGNIZED.has(t)) info('unchecked_type', path + '.@type', t + ' is outside this checker’s supported profiles. This does not mean it is invalid Schema.org.'); });
+        }
+      } else if (topLevel && !own(value, '@graph') && !own(value, '@id')) warn('missing_type', path, 'This node has no @type. Add a type if it defines an entity; ID references may omit it.');
+      if (own(value, '@id')) {
+        const identifier = value['@id'];
+        if (typeof identifier !== 'string' || !identifier.trim()) error('invalid_id', path + '.@id', '@id must be a nonempty string identifier.');
+        else {
+          if (!absoluteId(identifier) && !identifier.startsWith('_:')) warn('relative_id', path + '.@id', 'This ID depends on a page/base URL. Prefer an absolute stable URL so pasted graphs keep the same identity.');
+          if (Object.keys(value).every(k => ['@id', '@context'].includes(k))) refs.push({ id: identifier, path });
+          else {
+            const prior = ids.get(identifier) || [];
+            for (const entry of prior) for (const key of Object.keys(value)) {
+              if (key !== '@id' && key !== '@context' && own(entry.value, key) && canonical(entry.value[key]) !== canonical(value[key])) error('conflicting_id', path + '.' + key, 'The same @id has a conflicting ' + key + ' value at ' + entry.path + '. Use one consistent entity definition or merge intentional values explicitly.');
+            }
+            prior.push({ value, path }); ids.set(identifier, prior);
+          }
+        }
+      }
+      for (const [key, child] of Object.entries(value)) {
+        if (key === '@graph' || key === '@context') continue;
+        const p = path + '.' + key;
+        if (URL_FIELDS.has(key) && present(child)) list(child).forEach((item, i) => {
+          if (typeof item === 'string' && !webUrl(item)) error('absolute_url', p + (Array.isArray(child) ? '[' + i + ']' : ''), key + ' must use an absolute HTTP or HTTPS URL in these Google-oriented templates.');
+          else if (!isObject(item) && typeof item !== 'string') error('invalid_url_value', p, key + ' must be a URL or an appropriate structured object.');
+        });
+        if (DATE_FIELDS.has(key) && present(child)) {
+          if (!validDate(child)) error('invalid_date', p, 'Use a real ISO 8601 calendar date or date-time, for example 2026-10-12 or 2026-10-12T09:00:00+05:30.');
+          else if (child.includes('T') && !/(?:Z|[+-]\d{2}:\d{2})$/.test(child)) warn('timezone_missing', p, 'Add the actual timezone offset for an unambiguous time.');
+        }
+        if (isObject(child)) visit(child, p, false);
+        else if (Array.isArray(child)) child.forEach((c, i) => { if (isObject(c)) visit(c, p + '[' + i + ']', false); });
+      }
+      seen.delete(value);
+    }
+    rootList.forEach((n, i) => visit(n, Array.isArray(data) ? '$[' + i + ']' : '$', true));
+    const resolve = value => {
+      if (!isObject(value) || !value['@id'] || Object.keys(value).some(k => !['@id', '@context'].includes(k))) return value;
+      const entries = ids.get(value['@id']);
+      return entries ? Object.assign({}, ...entries.map(e => e.value)) : value;
+    };
+    const need = (obj, prop, path, message, severity) => { if (!present(obj[prop])) add(severity || 'error', 'missing_' + prop, path + '.' + prop, message); };
+    const requiredName = (n, p) => need(n, 'name', p, 'This Google feature profile requires name.');
+    function checkAddress(address, path, acceptText) {
+      const a = resolve(address);
+      if (acceptText && typeof a === 'string' && a.trim()) return;
+      if (!isObject(a)) { error('invalid_address', path, 'Use a PostalAddress object with an accurate physical address.' + (acceptText ? ' Google also accepts a complete address as text for an event.' : '')); return; }
+      if (a['@id'] && Object.keys(a).length === 1) { info('unresolved_address', path, 'The address is an external ID reference. This checker cannot verify its physical address fields.'); return; }
+      if (!hasType(a, 'PostalAddress')) warn('address_type', path + '.@type', 'Use PostalAddress for this address object.');
+      if (!['streetAddress', 'addressLocality', 'addressRegion', 'postalCode', 'addressCountry'].some(k => present(a[k]))) error('empty_address', path, 'Add actual physical address properties. An empty address does not describe a venue.');
+      else ['streetAddress', 'addressLocality', 'addressCountry'].forEach(k => need(a, k, path, 'Add ' + k + ' for a more complete physical address.', 'warning'));
+    }
+    for (const { value: n, path: p, types } of allNodes) {
+      if (types.includes('Organization')) ['name', 'url'].forEach(k => need(n, k, p, 'Google recommends organization ' + k + '; Organization has no required properties.', 'warning'));
+      if (types.includes('LocalBusiness')) { requiredName(n, p); need(n, 'address', p, 'Google’s LocalBusiness profile requires a physical PostalAddress.'); if (present(n.address)) checkAddress(n.address, p + '.address', false); }
+      if (types.includes('WebSite')) {
+        requiredName(n, p); need(n, 'url', p, 'Google’s site-name profile requires the domain or subdomain homepage URL.');
+        if (typeof n.url === 'string' && webUrl(n.url)) { const u = new URL(n.url); if (u.pathname !== '/' || u.search || u.hash) warn('website_homepage', p + '.url', 'Site-name markup belongs on the canonical domain or subdomain homepage.'); }
+      }
+      if (types.some(t => ['Article', 'BlogPosting', 'NewsArticle'].includes(t))) {
+        ['headline', 'image', 'datePublished', 'dateModified', 'author'].forEach(k => need(n, k, p, 'Google recommends ' + k + ' for Article. Article has no required properties.', 'warning'));
+        if (present(n.author)) list(n.author).forEach((a, i) => { const author = resolve(a); if (isObject(author) && !(author['@id'] && Object.keys(author).length === 1)) { need(author, 'name', p + '.author[' + i + ']', 'Google recommends a separate author name.', 'warning'); need(author, 'url', p + '.author[' + i + ']', 'Google recommends an author profile URL.', 'warning'); } });
+      }
+      if (types.includes('Product')) {
+        requiredName(n, p);
+        if (![n.offers, n.review, n.aggregateRating].some(present)) error('product_eligibility', p, 'A Google product snippet requires name and at least one of offers, review or aggregateRating.');
+        if (present(n.offers)) list(n.offers).forEach((offer, i) => {
+          const o = resolve(offer), op = p + '.offers[' + i + ']';
+          if (!isObject(o)) { error('invalid_offer', op, 'offers must contain an Offer or AggregateOffer object.'); return; }
+          if (o['@id'] && Object.keys(o).length === 1) { info('unresolved_offer', op, 'Offer is an external ID reference. Its required fields cannot be checked here.'); return; }
+          const aggregate = hasType(o, 'AggregateOffer');
+          const price = aggregate ? o.lowPrice : (present(o.price) ? o.price : isObject(o.priceSpecification) ? o.priceSpecification.price : undefined);
+          if (!present(price)) error('missing_price', op, aggregate ? 'AggregateOffer requires lowPrice for a product snippet.' : 'The product Offer path requires price or priceSpecification.price.');
+          else if (!['string', 'number'].includes(typeof price) || !/^(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(text(price)) || !Number.isFinite(Number(price)) || Number(price) < 0) error('invalid_price', op, 'Offer price must be a finite nonnegative number or a numeric string.');
+          const currency = o.priceCurrency || (isObject(o.priceSpecification) && o.priceSpecification.priceCurrency);
+          if (!currency) add(aggregate ? 'error' : 'warning', 'missing_priceCurrency', op + '.priceCurrency', aggregate ? 'Google’s AggregateOffer profile requires priceCurrency.' : 'Google recommends priceCurrency for product snippets; merchant listings require it.');
+          else if (typeof currency !== 'string' || !/^[A-Z]{3}$/.test(currency)) warn('currency_format', op + '.priceCurrency', 'Use the actual uppercase three-letter currency code, such as INR or USD.');
+        });
+        if (present(n.aggregateRating)) {
+          const a = resolve(n.aggregateRating), ap = p + '.aggregateRating';
+          if (!isObject(a)) error('invalid_rating', ap, 'aggregateRating must be an AggregateRating object.');
+          else if (!(a['@id'] && Object.keys(a).length === 1)) { need(a, 'ratingValue', ap, 'AggregateRating requires the real ratingValue.'); if (!present(a.ratingCount) && !present(a.reviewCount)) error('missing_rating_count', ap, 'AggregateRating needs ratingCount or reviewCount. Use only genuine visible ratings.'); }
+        }
+        if (present(n.review)) list(n.review).forEach((review, i) => {
+          const r = resolve(review), rp = p + '.review[' + i + ']';
+          if (!isObject(r)) error('invalid_review', rp, 'review must contain Review objects.');
+          else if (!(r['@id'] && Object.keys(r).length === 1)) { need(r, 'author', rp, 'A Google review snippet requires the real review author.'); need(r, 'reviewRating', rp, 'A Google review snippet requires reviewRating.'); if (isObject(r.reviewRating)) need(r.reviewRating, 'ratingValue', rp + '.reviewRating', 'Review rating requires ratingValue.'); }
+        });
+      }
+      if (types.includes('BreadcrumbList')) {
+        if (!Array.isArray(n.itemListElement) || n.itemListElement.length < 2) error('breadcrumb_count', p + '.itemListElement', 'Google breadcrumbs require at least two ListItem entries.');
+        else {
+          const positions = new Set();
+          n.itemListElement.forEach((rawItem, i) => {
+            const item = resolve(rawItem), ip = p + '.itemListElement[' + i + ']';
+            if (!isObject(item)) { error('breadcrumb_item', ip, 'Each breadcrumb must be a ListItem object.'); return; }
+            if (!hasType(item, 'ListItem')) error('breadcrumb_type', ip + '.@type', 'Breadcrumb entries need @type ListItem.');
+            if (!Number.isInteger(item.position) || item.position < 1) error('breadcrumb_position', ip + '.position', 'Use a positive integer breadcrumb position.');
+            else { if (positions.has(item.position)) error('breadcrumb_duplicate_position', ip + '.position', 'Each breadcrumb position must be unique.'); positions.add(item.position); if (item.position !== i + 1) warn('breadcrumb_order', ip + '.position', 'Prefer contiguous breadcrumb positions starting at 1 in display order.'); }
+            const target = resolve(item.item);
+            if (!present(item.name) && !(isObject(target) && present(target.name))) error('breadcrumb_name', ip + '.name', 'Add a breadcrumb name, or a name on the Thing used as item.');
+            if (i < n.itemListElement.length - 1 && !present(item.item)) error('breadcrumb_url', ip + '.item', 'Every breadcrumb except the last needs an item URL or an object with @id.');
+            if (present(item.item) && !(typeof item.item === 'string' && webUrl(item.item)) && !(isObject(item.item) && typeof item.item['@id'] === 'string' && webUrl(item.item['@id']))) error('breadcrumb_url', ip + '.item', 'Use an absolute HTTP/HTTPS item URL or a Thing with an absolute @id.');
+          });
+        }
+      }
+      if (types.includes('FAQPage')) {
+        info('faq_retired', p, 'FAQPage remains Schema.org vocabulary, but Google retired FAQ rich results in May 2026.');
+        if (!Array.isArray(n.mainEntity) || !n.mainEntity.length) warn('faq_questions', p + '.mainEntity', 'Describe the visible questions in a mainEntity array.');
+        else n.mainEntity.forEach((q, i) => { if (!isObject(q) || !present(q.name) || !isObject(q.acceptedAnswer) || !present(q.acceptedAnswer.text)) warn('faq_answer', p + '.mainEntity[' + i + ']', 'Each visible question should have a name and an acceptedAnswer with full text.'); });
+      }
+      if (types.includes('Event')) {
+        requiredName(n, p); need(n, 'startDate', p, 'Google’s Event profile requires startDate.'); need(n, 'location', p, 'Google’s Event profile requires a real physical location.');
+        if (present(n.location)) {
+          const locations = list(n.location).map(resolve), physical = locations.filter(loc => isObject(loc) && !hasType(loc, 'VirtualLocation'));
+          locations.forEach((loc, i) => { if (!isObject(loc)) error('invalid_location', p + '.location[' + i + ']', 'Use a Place object for an event venue.'); });
+          if (!physical.length && locations.some(loc => hasType(loc, 'VirtualLocation'))) warn('virtual_event_unsupported', p + '.location', 'Google’s Event feature does not support virtual-only events. A real physical component is required.');
+          physical.forEach((location, i) => { const lp = p + '.location[' + i + ']'; if (location['@id'] && Object.keys(location).length === 1) info('unresolved_location', lp, 'The venue is an external ID reference; physical venue fields cannot be verified.'); else { if (!hasType(location, 'Place')) warn('event_place', lp + '.@type', 'Use Place for the physical event venue.'); need(location, 'address', lp, 'Google’s Event profile requires a venue address.'); if (present(location.address)) checkAddress(location.address, lp + '.address', true); } });
+        }
+        ['description', 'endDate', 'image', 'offers', 'organizer', 'performer'].forEach(k => need(n, k, p, 'Google recommends event ' + k + ' when applicable and accurate.', 'warning'));
+      }
+      if (types.includes('VideoObject')) { ['name', 'thumbnailUrl', 'uploadDate'].forEach(k => need(n, k, p, 'Google’s Video profile requires ' + k + '.')); ['description', 'duration'].forEach(k => need(n, k, p, 'Google recommends video ' + k + '.', 'warning')); if (!present(n.contentUrl) && !present(n.embedUrl)) warn('video_url', p, 'Provide an accessible contentUrl or embedUrl so Google can find the video.'); }
+      if (['Person', 'WebPage', 'Service'].some(t => types.includes(t))) info('semantic_type', p, 'This type can describe entities, but alone has no dedicated generic Google rich-result feature.');
+      const firstDate = n.startDate || n.datePublished, lastDate = n.endDate || n.dateModified;
+      if (validDate(firstDate) && validDate(lastDate) && Date.parse(lastDate) < Date.parse(firstDate)) error('date_order', p, 'The end or modified date is earlier than the start or published date.');
+    }
+    refs.forEach(r => { if (!ids.has(r.id)) info('external_reference', r.path, 'This ID is not defined in this document. External references can be valid; verify that it identifies the intended entity.'); });
+    info('limited_validation', '$', LIMIT_TEXT);
+    return done();
+  }
+  function validate(input) {
+    try { return validateInternal(input); }
+    catch (_) {
+      return { issues: [
+        { severity: 'error', code: 'unsafe_or_deep_input', path: '$', message: 'This input could not be checked safely. Use ordinary JSON without circular references, executable getters or excessive nesting.' },
+        { severity: 'info', code: 'limited_validation', path: '$', message: LIMIT_TEXT }
+      ], nodes: [], summary: { errors: 1, warnings: 0, info: 1 } };
+    }
+  }
+  return { TYPES, generate, graph, serialize, scriptTag, validate };
+});
+
+</script>
+<script>
+/* Hustle Schema Studio: local HTML source checks. No DOM insertion or network requests. */
+(function (root, factory) {
+  'use strict';
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.HustlePageChecker = factory();
+}(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  const MAX_HTML_BYTES = 2 * 1024 * 1024;
+  const RAW_TEXT_TAGS = new Set(['script', 'style', 'textarea', 'title', 'xmp', 'iframe', 'noembed', 'noframes', 'noscript']);
+  const ENTITIES = Object.freeze({ amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: '\u00a0', colon: ':', sol: '/', period: '.', equals: '=', Tab: '\t', NewLine: '\n' });
+
+  function decodeEntities(value) {
+    return String(value).replace(/&(#(?:x[0-9a-f]+|[0-9]+)|[a-z][a-z0-9]+);/gi, function (all, entity) {
+      if (entity[0] !== '#') return Object.prototype.hasOwnProperty.call(ENTITIES, entity) ? ENTITIES[entity] : all;
+      const hex = entity[1].toLowerCase() === 'x';
+      const point = parseInt(entity.slice(hex ? 2 : 1), hex ? 16 : 10);
+      if (point === 0 || point > 0x10ffff || (point >= 0xd800 && point <= 0xdfff)) return '\ufffd';
+      return String.fromCodePoint(point);
+    });
+  }
+
+  function byteLength(value) {
+    if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(value).length;
+    return value.length * 2; // Conservative limit for older runtimes without TextEncoder.
+  }
+
+  function attributes(source) {
+    const attrs = Object.create(null);
+    const expression = /([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
+    let match;
+    while ((match = expression.exec(source))) {
+      const name = match[1].toLowerCase();
+      if (!Object.prototype.hasOwnProperty.call(attrs, name)) {
+        attrs[name] = decodeEntities(match[2] !== undefined ? match[2] : match[3] !== undefined ? match[3] : match[4] !== undefined ? match[4] : '');
+      }
+    }
+    return attrs;
+  }
+
+  // This deliberately reads source instead of constructing a browser DOM. It skips
+  // comments and raw-text contents, and honors quoted > characters in start tags.
+  // It is a focused source scanner, not a complete browser HTML tree builder.
+  function scan(source, visit) {
+    let cursor = 0;
+    while (cursor < source.length) {
+      const start = source.indexOf('<', cursor);
+      if (start < 0) break;
+      if (source.startsWith('<!--', start)) {
+        const end = source.indexOf('-->', start + 4);
+        cursor = end < 0 ? source.length : end + 3;
+        continue;
+      }
+      const tag = /^<([a-z][a-z0-9:-]*)(?=[\s/>])/i.exec(source.slice(start));
+      if (!tag) { cursor = start + 1; continue; }
+      let end = start + tag[0].length;
+      let quote = '';
+      for (; end < source.length; end += 1) {
+        const char = source[end];
+        if (quote) { if (char === quote) quote = ''; }
+        else if (char === '"' || char === "'") quote = char;
+        else if (char === '>') break;
+      }
+      if (end >= source.length) break;
+      const name = tag[1].toLowerCase();
+      const attrs = attributes(source.slice(start + tag[0].length, end));
+      let content = null;
+      cursor = end + 1;
+      if (RAW_TEXT_TAGS.has(name)) {
+        const close = new RegExp('</' + name + '(?=[\\t\\n\\f\\r />])[^>]*>', 'ig');
+        close.lastIndex = cursor;
+        const closing = close.exec(source);
+        content = source.slice(cursor, closing ? closing.index : source.length);
+        cursor = closing ? close.lastIndex : source.length;
+      }
+      visit({ name: name, attrs: attrs, content: content });
+    }
+  }
+
+  function httpUrl(value, base) {
+    try {
+      const url = base ? new URL(value, base) : new URL(value);
+      return /^(https?:)$/.test(url.protocol) ? url.href : null;
+    } catch (_) { return null; }
+  }
+
+  function analyze(html, pageUrlOptional) {
+    const result = {
+      documents: [], issues: [],
+      page: { title: '', canonical: '', robots: [], jsonLdBlocks: 0, hasMicrodata: false, hasRdfa: false },
+      blocks: []
+    };
+    function issue(severity, code, path, message) { result.issues.push({ severity: severity, code: code, path: path, message: message }); }
+    if (typeof html !== 'string') {
+      issue('error', 'source.input_type', '$', 'Paste HTML source as text.');
+      return result;
+    }
+    if (byteLength(html) > MAX_HTML_BYTES) {
+      issue('error', 'source.too_large', '$', 'HTML exceeds the 2 MiB local source-check limit. Use a smaller page source.');
+      return result;
+    }
+    const base = typeof pageUrlOptional === 'string' && pageUrlOptional.trim() ? httpUrl(pageUrlOptional.trim()) : null;
+    if (pageUrlOptional && !base) issue('warning', 'page.url_invalid', '$.pageUrl', 'The page URL is not an absolute HTTP(S) URL. Relative canonical URLs cannot be resolved.');
+    const titles = [];
+    const canonicals = [];
+    let sawBase = false;
+    scan(html, function (tag) {
+      const attrs = tag.attrs;
+      if ('itemscope' in attrs || 'itemtype' in attrs) result.page.hasMicrodata = true;
+      if ('typeof' in attrs || 'vocab' in attrs || 'about' in attrs || ('property' in attrs && !/^(og:|twitter:)/i.test(attrs.property))) result.page.hasRdfa = true;
+      if (tag.name === 'title') titles.push(decodeEntities(tag.content || '').replace(/\s+/g, ' ').trim());
+      if (tag.name === 'base' && attrs.href) sawBase = true;
+      if (tag.name === 'link' && (attrs.rel || '').toLowerCase().split(/\s+/).includes('canonical')) {
+        const raw = (attrs.href || '').trim();
+        if (!raw) { issue('warning', 'page.canonical_empty', '$.page.canonical', 'A canonical link has no usable href.'); return; }
+        const resolved = httpUrl(raw, base);
+        canonicals.push(resolved || raw);
+        if (!resolved) issue('warning', 'page.canonical_unresolved', '$.page.canonical', 'A canonical URL could not be resolved to an HTTP(S) URL. Supply the page URL and review the canonical value.');
+      }
+      if (tag.name === 'meta') {
+        const agent = (attrs.name || '').trim().toLowerCase();
+        if (agent === 'robots' || agent === 'googlebot') {
+          const content = attrs.content || '';
+          const tokens = content.toLowerCase().split(/[\s,;]+/).filter(Boolean);
+          const noindex = tokens.includes('noindex') || tokens.includes('none');
+          result.page.robots.push({ agent: agent, content: content, noindex: noindex });
+          if (noindex) issue('warning', 'page.noindex', '$.page.robots', 'A ' + agent + ' meta tag contains noindex or none. This source requests exclusion from indexing for that crawler; confirm the intended live behavior.');
+        }
+        if ((attrs['http-equiv'] || '').trim().toLowerCase() === 'refresh') issue('info', 'page.meta_refresh', '$.page', 'A meta refresh is present. Review the redirect destination and where the structured data belongs.');
+      }
+      if (tag.name !== 'script' || (attrs.type || '').split(';')[0].trim().toLowerCase() !== 'application/ld+json') return;
+      const index = result.blocks.length;
+      const path = '$.blocks[' + index + ']';
+      if (attrs.src) issue('warning', 'jsonld.external_src', path, 'This JSON-LD script has a src attribute. This checker does not fetch it; provide the inline JSON-LD that is actually present on the page.');
+      try {
+        const document = JSON.parse(tag.content || '');
+        result.blocks.push({ index: index, valid: true, document: document });
+        result.documents.push(document);
+      } catch (error) {
+        const message = String(error.message || 'Invalid JSON').slice(0, 250);
+        result.blocks.push({ index: index, valid: false, error: message });
+        issue('error', 'jsonld.invalid_json', path, 'JSON-LD block ' + (index + 1) + ' is not valid JSON: ' + message);
+      }
+    });
+    result.page.jsonLdBlocks = result.blocks.length;
+    result.page.title = titles[0] || '';
+    result.page.canonical = canonicals[0] || '';
+    if (!result.page.title) issue('info', 'page.title_missing', '$.page.title', 'No nonempty title was found in this source. This is a page review item, not a JSON-LD syntax requirement.');
+    if (titles.length > 1) issue('warning', 'page.title_multiple', '$.page.title', 'Multiple title elements were found. Review the complete page source.');
+    if (canonicals.length === 0) issue('info', 'page.canonical_missing', '$.page.canonical', 'No usable HTML canonical link was found. A canonical is not a universal requirement for valid JSON-LD.');
+    if (canonicals.length > 1) {
+      const conflict = new Set(canonicals).size > 1;
+      issue(conflict ? 'warning' : 'info', conflict ? 'page.canonical_conflict' : 'page.canonical_multiple', '$.page.canonical', conflict ? 'Conflicting HTML canonical URLs were found. Review which page should be preferred.' : 'More than one HTML canonical link was found with the same resolved value.');
+    }
+    if (sawBase) issue('info', 'page.base_present', '$.page.canonical', 'A base element was found. This source checker resolves relative canonicals against the supplied page URL, so review any base-element effect separately.');
+    if (!result.blocks.length) issue('warning', 'jsonld.not_found', '$.blocks', 'No application/ld+json script blocks were found in this source. Other formats or JavaScript-generated data may still exist on the live page.');
+    if (result.page.hasMicrodata) issue('info', 'source.microdata_unchecked', '$.page.hasMicrodata', 'Microdata attributes were found. This checker extracts JSON-LD only and has not validated that markup.');
+    if (result.page.hasRdfa) issue('info', 'source.rdfa_unchecked', '$.page.hasRdfa', 'Possible RDFa attributes were found. This checker extracts JSON-LD only and has not validated that markup.');
+    issue('info', 'source.limitations', '$', 'This is an inert check of pasted HTML source, not a live crawl or full browser parse. It cannot verify robots.txt, HTTP status or headers, rendered JavaScript, Google-selected canonical URLs, indexing, or rich-result eligibility. No network requests were made.');
+    return result;
+  }
+
+  return Object.freeze({ analyze: analyze, MAX_HTML_BYTES: MAX_HTML_BYTES });
+}));
+
+</script>
+<script>
+/* Coordinates independent JSON-LD document checks and cross-document ID review. */
+(function (root, factory) {
+  'use strict';
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./schema-engine.js'), require('./page-checker.js'));
+  else root.HustleAudit = factory(root.HustleSchema, root.HustlePageChecker);
+}(typeof globalThis !== 'undefined' ? globalThis : this, function (engine, checker) {
+  'use strict';
+  const MAX_INPUT_BYTES = 2 * 1024 * 1024;
+  const SHARED_CODES = new Set(['conflicting_id', 'external_reference']);
+  const issue = (code, message) => ({ severity: 'error', code: code, path: '$', message: message });
+
+  function inspect(input, mode, pageUrl) {
+    if (typeof input !== 'string') return { issues: [issue('input_type', 'Provide JSON-LD or HTML as text.')], nodes: [] };
+    const size = typeof TextEncoder !== 'undefined' ? new TextEncoder().encode(input).length : input.length * 2;
+    if (size > MAX_INPUT_BYTES) return { issues: [issue('input_too_large', 'Use an input no larger than 2 MiB.')], nodes: [] };
+    if (!input.trim()) return { issues: [issue('empty_input', 'Paste JSON-LD or HTML before running checks.')], nodes: [] };
+    if (mode !== 'json' && mode !== 'html') return { issues: [issue('invalid_mode', 'Choose JSON-LD or HTML input mode.')], nodes: [] };
+    if (!engine || !checker) return { issues: [issue('missing_dependency', 'The schema engine and page checker must load before the audit runner.')], nodes: [] };
+    try {
+      if (mode === 'json') {
+        const report = engine.validate(input);
+        return { issues: report.issues, nodes: report.nodes };
+      }
+      const source = checker.analyze(input, pageUrl);
+      const issues = [];
+      const nodes = [];
+      const signatures = new Set();
+      let addedLimitNote = false;
+      function add(finding) {
+        // This same global limitation is otherwise repeated once per script.
+        if (finding.code === 'limited_validation') {
+          if (addedLimitNote) return;
+          addedLimitNote = true;
+          finding = Object.assign({}, finding, { path: '$' });
+        }
+        const signature = JSON.stringify([finding.severity, finding.code, finding.path, finding.message]);
+        if (!signatures.has(signature)) { signatures.add(signature); issues.push(finding); }
+      }
+      source.issues.forEach(add);
+      const combined = [];
+      const combinedPaths = [];
+      let validBlocks = 0;
+      for (const block of source.blocks) {
+        if (!block.valid) continue;
+        validBlocks += 1;
+        const prefix = '$.blocks[' + block.index + ']';
+        // Context is scoped to each original script; a context from one script
+        // must never make a separate script appear to have a Schema.org context.
+        const report = engine.validate(block.document);
+        const remap = value => typeof value === 'string' ? value.replace(/\$(?=$|[.\[])/g, prefix) : value;
+        for (const finding of report.issues) {
+          if (!SHARED_CODES.has(finding.code)) add(Object.assign({}, finding, { path: remap(finding.path), message: remap(finding.message) }));
+        }
+        nodes.push(...report.nodes);
+        if (Array.isArray(block.document)) block.document.forEach((node, index) => { combined.push(node); combinedPaths.push(prefix + '[' + index + ']'); });
+        else { combined.push(block.document); combinedPaths.push(prefix); }
+      }
+      if (combined.length) {
+        const report = engine.validate(combined);
+        const remap = value => typeof value === 'string' ? value.replace(/\$\[(\d+)\]/g, (match, index) => combinedPaths[Number(index)] || match) : value;
+        // Only literal-ID relationships are collected from the combined input.
+        // Type/profile/context validation stays with the independent documents.
+        for (const finding of report.issues) {
+          if (SHARED_CODES.has(finding.code)) add(Object.assign({}, finding, { path: remap(finding.path), message: remap(finding.message) }));
+        }
+      }
+      if (validBlocks > 1) add({ severity: 'info', code: 'source.context_scope', path: '$.blocks', message: 'Each JSON-LD script was checked independently. Cross-script ID review compares literal identifiers only; custom or remote contexts and relative bases are not expanded. A matching ID does not prove semantic equivalence across different contexts.' });
+      return { issues: issues, nodes: nodes, page: source.page };
+    } catch (error) {
+      return { issues: [issue('check_interrupted', 'Could not finish these local checks: ' + String(error.message || error).slice(0, 250))], nodes: [] };
+    }
+  }
+
+  return Object.freeze({ inspect: inspect, MAX_INPUT_BYTES: MAX_INPUT_BYTES });
+}));
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const engine = window.HustleSchema;
+  const audit = window.HustleAudit;
+  const $ = id => document.getElementById(id);
+  const state = { type: 'Organization', nodes: [], drafts: Object.create(null), editingByType:Object.create(null), mode: 'json', report: null, toastTimer: null, editing: null };
+  const el = (tag, cls, value) => { const node = document.createElement(tag); if (cls) node.className = cls; if (value !== undefined) node.textContent = value; return node; };
+  const type = () => engine.TYPES.find(item => item.id === state.type);
+  function toast(message) { $('toast').textContent = message; $('toast').hidden = false; clearTimeout(state.toastTimer); state.toastTimer = setTimeout(() => { $('toast').hidden = true; }, 4000); }
+  function switchView(view) {
+    document.querySelectorAll('[data-view]').forEach(button => { const active = button.dataset.view === view; button.classList.toggle('active', active); if (active) button.setAttribute('aria-current', 'page'); else button.removeAttribute('aria-current'); });
+    ['build', 'check', 'install'].forEach(name => { $('view-' + name).hidden = view !== name; });
+  }
+  function readForm() { const data = {}; for (const field of type().fields) { const input = $('field-' + field.key); data[field.key] = input ? input.value.trim() : ''; } return data; }
+  function saveDraft() { state.drafts[state.type] = readForm(); }
+  function renderTemplates() {
+    const query = $('template-search').value.toLowerCase().trim();
+    $('template-list').replaceChildren();
+    for (const template of engine.TYPES.filter(item => (item.label + ' ' + item.id + ' ' + item.category).toLowerCase().includes(query))) {
+      const button = el('button', 'template-button' + (template.id === state.type ? ' selected' : ''), template.label);
+      button.type = 'button'; button.setAttribute('aria-pressed', String(template.id === state.type));
+      button.addEventListener('click', () => { saveDraft(); state.type = template.id; state.editing = state.editingByType[state.type] ?? null; renderTemplates(); renderForm(); });
+      $('template-list').append(button);
+    }
+    if (!$('template-list').childElementCount) $('template-list').append(el('p', 'muted', 'No matching template.'));
+    $('type-count').textContent = engine.TYPES.length;
+  }
+  function renderForm() {
+    const template = type(); const values = state.drafts[state.type] || {};
+    $('template-category').textContent = template.category;
+    $('template-title').textContent = template.label;
+    $('template-description').textContent = template.description;
+    $('template-status').textContent = template.googleStatus;
+    $('template-source').href = template.source || 'https://schema.org/' + template.id;
+    $('schema-fields').replaceChildren();
+    for (const field of template.fields) {
+      const wide = field.type === 'textarea' || field.type === 'url' || /name|headline|id|description/i.test(field.key);
+      const wrapper = el('div', 'field' + (wide ? ' wide' : ''));
+      const label = el('label', '', field.label + (field.required ? ' *' : ''));
+      label.htmlFor = 'field-' + field.key; wrapper.append(label);
+      const input = el(field.type === 'textarea' ? 'textarea' : field.type === 'select' ? 'select' : 'input');
+      input.id = 'field-' + field.key; input.name = field.key;
+      if (input.tagName === 'INPUT') { input.type = field.type || 'text'; if (field.type === 'number') input.step = 'any'; }
+      if (field.type === 'select') {
+        input.append(new Option('Select…', ''));
+        for (const option of field.options || []) input.append(new Option(typeof option === 'string' ? option : option.label, typeof option === 'string' ? option : option.value));
+      }
+      input.value = values[field.key] === undefined ? '' : String(values[field.key]);
+      input.required = !!field.required; input.autocomplete = 'off';
+      if (field.placeholder) input.placeholder = field.placeholder;
+      if (field.help) { const help = el('p', 'field-help', field.help); help.id = 'help-' + field.key; input.setAttribute('aria-describedby', help.id); wrapper.append(input, help); } else wrapper.append(input);
+      $('schema-fields').append(wrapper);
+    }
+    $('form-error').hidden = true;
+    $('add-entity').textContent = state.editing === null ? 'Add to page schema ＋' : 'Save entity changes';
+  }
+  function graphData() { return engine.graph(state.nodes.map(item => item.node)); }
+  function renderGraph() {
+    $('entity-list').replaceChildren();
+    state.nodes.forEach((item, index) => {
+      const node = item.node; const card = el('div', 'entity-card');
+      const details = el('div', 'entity-details');
+      details.append(el('strong', '', node.name || node.headline || node['@type']), el('small', '', node['@id'] || node['@type']));
+      card.append(el('span', 'entity-icon', '{ }'), details);
+      if (item.form) {
+        const edit = el('button', 'icon-button', '✎'); edit.title = 'Edit ' + node['@type']; edit.setAttribute('aria-label', edit.title);
+        edit.addEventListener('click', () => { saveDraft(); state.type = item.type; state.drafts[state.type] = {...item.form}; state.editing = index; state.editingByType[state.type] = index; renderTemplates(); renderForm(); $('template-title').scrollIntoView({behavior:'auto', block:'start'}); }); card.append(edit);
+      }
+      const remove = el('button', 'icon-button', '×'); remove.title = 'Remove ' + node['@type']; remove.setAttribute('aria-label', remove.title);
+      remove.addEventListener('click', () => { saveDraft(); state.nodes.splice(index, 1); for(const key of Object.keys(state.editingByType)) { if(state.editingByType[key] === index) delete state.editingByType[key]; else if(state.editingByType[key] > index) state.editingByType[key]--; } state.editing = state.editingByType[state.type] ?? null; renderGraph(); renderForm(); invalidateReport(); }); card.append(remove);
+      $('entity-list').append(card);
+    });
+    const count = state.nodes.length;
+    $('entity-count').textContent = count + (count === 1 ? ' entity' : ' entities');
+    $('empty-graph').hidden = count > 0;
+    $('code-output').textContent = count ? engine.scriptTag(graphData()) : '// Add your first entity to create code.';
+    ['copy-code', 'download-json', 'download-snippet', 'check-graph', 'clear-graph'].forEach(id => { $(id).disabled = !count; });
+  }
+  function download(filename, value, mime) {
+    const objectUrl = URL.createObjectURL(new Blob([value], {type:mime || 'text/plain;charset=utf-8'}));
+    const link = el('a'); link.href = objectUrl; link.download = filename; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(objectUrl), 2000);
+  }
+  async function copyCode() {
+    const text = engine.scriptTag(graphData());
+    try { await navigator.clipboard.writeText(text); toast('Schema copied. Add it to the page it describes.'); }
+    catch (_) {
+      const textarea = el('textarea'); textarea.value = text; textarea.style.position = 'fixed'; textarea.style.opacity = '0'; document.body.append(textarea); textarea.select(); let copied = false;
+      try { copied = document.execCommand('copy'); } catch (_) {} textarea.remove();
+      toast(copied ? 'Schema copied.' : 'Copy is unavailable here. Use the HTML snippet download.');
+    }
+  }
+  function invalidateReport() { state.report = null; $('download-report').disabled = true; $('check-results').hidden = true; $('check-empty').hidden = false; }
+  function mode(name) {
+    state.mode = name;
+    ['json', 'html'].forEach(value => { $('mode-' + value).classList.toggle('selected', value === name); $('mode-' + value).setAttribute('aria-pressed', String(value === name)); });
+    $('page-url-wrap').hidden = name !== 'html';
+    $('check-input').placeholder = name === 'html' ? 'Paste page HTML or one or more JSON-LD script blocks…' : 'Paste JSON-LD here, starting with { or [ …';
+    invalidateReport();
+  }
+  function showReport(issues, nodes, page) {
+    const summary = {errors:0,warnings:0,info:0};
+    for (const issue of issues) summary[issue.severity === 'error' ? 'errors' : issue.severity === 'warning' ? 'warnings' : 'info']++;
+    state.report = {tool:'Hustle Schema Studio',version:'1.0.0',rulesReviewed:'2026-10-12',checkedAt:new Date().toISOString(),inputMode:state.mode,scope:'Local syntax and selected rules only. No live crawling, rendered-content, indexing or full eligibility verification.',summary,nodes,page:page || null,issues};
+    $('check-empty').hidden = true; $('check-results').hidden = false; $('download-report').disabled = false;
+    $('check-summary').replaceChildren();
+    [['error','errors','Errors'],['warning','warnings','Warnings'],['info','info','Notes']].forEach(([cls,key,label]) => { const metric = el('div','metric '+cls); metric.append(el('b','',summary[key]),el('span','',label)); $('check-summary').append(metric); });
+    $('page-facts').replaceChildren();
+    if (page) { for (const [label,value] of [['Title',page.title || 'Not found'],['Canonical',page.canonical || 'Not found'],['JSON-LD blocks',page.jsonLdBlocks]]) $('page-facts').append(el('div','page-fact',label + ': ' + value)); }
+    $('findings').replaceChildren();
+    if (!summary.errors && nodes.length) $('findings').append(el('div','passed','No errors found by these checks. Review the remaining notes and run official validation.'));
+    else if (!summary.errors) $('findings').append(el('div','scope-note','No typed schema nodes were available to evaluate. Review the findings below.'));
+    const rank = {error:0,warning:1,info:2};
+    [...issues].sort((a,b) => rank[a.severity] - rank[b.severity]).forEach(issue => {
+      const item = el('article','finding '+issue.severity); const top = el('div','finding-top');
+      top.append(el('b','',issue.severity),el('code','',issue.code)); item.append(top,el('p','',issue.message)); if (issue.path) item.append(el('span','path',issue.path)); $('findings').append(item);
+    });
+  }
+  function runChecks() {
+    const input = $('check-input').value;
+    if (!input.trim()) { showReport([{severity:'error',code:'EMPTY_INPUT',path:'$',message:'Paste JSON-LD or HTML before running checks.'}],[]); return; }
+    if (new TextEncoder().encode(input).length > 2*1024*1024) { showReport([{severity:'error',code:'INPUT_TOO_LARGE',path:'$',message:'Use an input under 2 MiB.'}],[]); return; }
+    try {
+      const report = audit.inspect(input,state.mode,$('page-url').value.trim());
+      showReport(report.issues,report.nodes,report.page);
+    } catch (error) { showReport([{severity:'error',code:'CHECK_INTERRUPTED',path:'$',message:'Could not finish this input: '+error.message}],[]); }
+  }
+  $('schema-form').addEventListener('submit', event => {
+    event.preventDefault();
+    try {
+      const form = readForm(); const node = engine.generate(state.type,form);
+      const duplicate = node['@id'] && state.nodes.some((item,index) => index !== state.editing && item.node['@id'] === node['@id']);
+      if (duplicate) throw new Error('This entity ID is already in your graph. Edit the existing entity or use a different ID.');
+      const item = {type:state.type,form:{...form},node};
+      if (state.editing === null) state.nodes.push(item); else state.nodes[state.editing] = item;
+      state.drafts[state.type] = form; delete state.editingByType[state.type]; state.editing = null; renderGraph(); renderForm(); invalidateReport(); toast('Entity saved to this page schema.');
+    } catch (error) { $('form-error').textContent = error.message; $('form-error').hidden = false; }
+  });
+  $('template-search').addEventListener('input',renderTemplates);
+  $('load-example').addEventListener('click',() => { state.drafts[state.type] = {...type().example}; renderForm(); toast('Demo data loaded. Replace it with real page information.'); });
+  $('reset-form').addEventListener('click',() => { state.drafts[state.type] = {}; delete state.editingByType[state.type]; state.editing = null; renderForm(); });
+  $('hustle-starter').addEventListener('click',() => {
+    if (state.nodes.length) return;
+    state.nodes = [
+      {type:'Organization',form:{name:'Hustle Marketers',url:'https://hustlemarketers.com/',id:'https://hustlemarketers.com/#organization'},node:{'@type':'Organization','@id':'https://hustlemarketers.com/#organization',name:'Hustle Marketers',url:'https://hustlemarketers.com/'}},
+      {type:'WebSite',form:{name:'Hustle Marketers',url:'https://hustlemarketers.com/',id:'https://hustlemarketers.com/#website',publisherId:'https://hustlemarketers.com/#organization'},node:{'@type':'WebSite','@id':'https://hustlemarketers.com/#website',name:'Hustle Marketers',url:'https://hustlemarketers.com/',publisher:{'@id':'https://hustlemarketers.com/#organization'}}}
+    ]; renderGraph(); invalidateReport(); toast('Homepage starter added. Review existing plugin markup before using.');
+  });
+  $('copy-code').addEventListener('click',copyCode);
+  $('download-json').addEventListener('click',() => download('page-schema.jsonld',engine.serialize(graphData()),'application/ld+json'));
+  $('download-snippet').addEventListener('click',() => download('page-schema-snippet.html',engine.scriptTag(graphData()),'text/html'));
+  $('clear-graph').addEventListener('click',() => { if (!window.confirm('Clear all entities from this page schema? Download your work first if you want to keep it.')) return; state.nodes = []; state.editingByType = Object.create(null); state.editing = null; renderGraph(); renderForm(); invalidateReport(); toast('Page schema cleared.'); });
+  $('check-graph').addEventListener('click',() => { mode('json'); $('check-input').value = engine.serialize(graphData()); switchView('check'); runChecks(); });
+  $('mode-json').addEventListener('click',() => mode('json')); $('mode-html').addEventListener('click',() => mode('html'));
+  $('check-input').addEventListener('input',invalidateReport); $('page-url').addEventListener('input',invalidateReport);
+  $('run-check').addEventListener('click',runChecks);
+  $('download-report').addEventListener('click',() => { if(state.report) download('schema-check-report.json',JSON.stringify(state.report,null,2),'application/json'); });
+  $('check-demo').addEventListener('click',() => { mode('json'); $('check-input').value = JSON.stringify({'@context':'https://schema.org','@type':'Product',name:'Demo product',image:'product.jpg',offers:{'@type':'Offer',price:'not a price',priceCurrency:'US'}},null,2); runChecks(); });
+  $('import-file').addEventListener('change',async event => {
+    const file = event.target.files[0]; if (!file) return;
+    if (file.size > 2*1024*1024) { toast('Choose a file under 2 MiB.'); event.target.value = ''; return; }
+    try { const contents = await file.text(); mode(/\.html?$/i.test(file.name) || /^\s*</.test(contents) ? 'html' : 'json'); $('check-input').value = contents; toast('File loaded. Run checks to inspect it.'); }
+    catch (_) { toast('The file could not be read. Try pasting its text.'); } event.target.value = '';
+  });
+  document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click',() => switchView(button.dataset.view)));
+  document.querySelector('.brand').addEventListener('click',event => {event.preventDefault();switchView('build');});
+  window.addEventListener('beforeunload',event => { if (state.nodes.length) {event.preventDefault();event.returnValue = '';} });
+  renderTemplates(); renderForm(); renderGraph();
+})();
+
+</script>
+</body>
+</html>

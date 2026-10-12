@@ -1,0 +1,46 @@
+HUSTLE SCHEMA STUDIO 1.0.0
+Verification completed: 12 October 2026
+
+AUTOMATED CHECKS
+59 tests passed, 0 failed, 0 skipped.
+
+- 30 schema engine tests: all 12 templates, required and recommended rules,
+  dates and timezones, numeric values, URL shapes, entity references,
+  conflicting IDs, alternate Product paths, script escaping and input limits.
+- 14 HTML source tests: inert extraction, mixed valid/invalid blocks,
+  canonical links, crawler-scoped noindex, comments/raw-text handling,
+  other-format notices and no script or asset execution.
+- 8 combined audit tests: separate contexts and original block paths,
+  shared IDs across blocks, malformed roots and input-size limits.
+- 7 interface behavior tests: real app event handlers in a Node VM with
+  a minimal DOM harness. Form generation, editing, safe text rendering,
+  report invalidation, file limits and Blob download contents.
+
+ADDITIONAL PACKAGE CHECKS
+- All four source JavaScript files passed Node syntax checks.
+- All four scripts in the portable HTML (index.html) compiled successfully.
+- Bundled checking modules interoperated in a fresh JavaScript VM.
+- Static interface element IDs referenced by the app were present and unique.
+- Portable HTML has no external script or stylesheet dependencies.
+- All 12 demonstration templates generated JSON-LD without errors under
+  the app's own limited profiles. Recommendations can still be present.
+
+VERIFICATION LIMITS
+The interface behavior harness is not an actual browser or visual test.
+Actual browser layout, assistive-technology behavior and cross-browser
+compatibility have not been visually verified in this environment.
+
+No schema was installed on a live website, submitted to Google, or tested
+through the official Rich Results Test. No Search Console account was used.
+No live crawl, robots.txt, HTTP header/status, rendering, indexing, complete
+Schema.org vocabulary or rich-result eligibility verification was performed.
+
+The checker explains these limits in the interface and generated reports.
+Read SOURCES.md for the official rules reviewed while implementing it.
+
+REPRODUCE
+From this directory, with Node.js 18 or newer:
+  npm test
+  npm run build
+
+No npm install is required.

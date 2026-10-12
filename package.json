@@ -1,0 +1,17 @@
+{
+  "name": "hustle-schema-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free browser-based JSON-LD schema generator and checker by Hustle Marketers",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "build": "node build.js"
+  },
+  "author": "Ishant Sharma <https://hustlemarketers.com>",
+  "license": "MIT",
+  "homepage": "https://hustlemarketers-art.github.io/hustle-schema-studio/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hustlemarketers-art/hustle-schema-studio.git"
+  }
+}
